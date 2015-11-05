@@ -22,7 +22,7 @@
 // Filename:            AssemblyInfo.cs
 // 
 // Created:             05.11.2015 (09:47)
-// Last Modified:       05.11.2015 (13:46)
+// Last Modified:       05.11.2015 (17:08)
 
 #endregion
 
@@ -46,7 +46,7 @@ using System.Windows;
 [assembly: AssemblyCulture("")]
 [assembly: ComVisible(false)]
 [assembly: ThemeInfo(ResourceDictionaryLocation.None, ResourceDictionaryLocation.SourceAssembly)]
-[assembly: AssemblyVersion("0.1.3")]
-[assembly: AssemblyFileVersion("0.1.3")]
+[assembly: AssemblyVersion("0.1.8")]
+[assembly: AssemblyFileVersion("0.1.8")]
 [assembly: NeutralResourcesLanguage("de-DE")]
 [assembly: CLSCompliant(false)]

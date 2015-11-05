@@ -78,6 +78,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BSLApp.cs" />
+    <Compile Include="Modules\Logger.cs" />
+    <Compile Include="Modules\LoggerException.cs" />
     <Compile Include="Windows\LauncherWindow.xaml.cs">
       <DependentUpon>LauncherWindow.xaml</DependentUpon>
     </Compile>
@@ -109,14 +111,12 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <None Include="app.config" />
     <None Include="BickSkyLauncherKey.snk" />
-    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>
     <VisualStudio>
-      <UserProperties Reactor_Deploy="0" Reactor_Output="X:\Brick Sky\Brick Sky Launcher\Protected\Output\Brick Sky Launcher.exe" Reactor_Configuration="ALL" Reactor_Project="X:\Brick Sky\Brick Sky Launcher\Protected\BrickSkyLauncherAlpha.nrproj" Reactor_Commands="" Reactor_Enabled="0" />
+      <UserProperties Reactor_Enabled="0" Reactor_Commands="" Reactor_Project="X:\Brick Sky\Brick Sky Launcher\Protected\BrickSkyLauncherAlpha.nrproj" Reactor_Configuration="ALL" Reactor_Output="X:\Brick Sky\Brick Sky Launcher\Protected\Output\Brick Sky Launcher.exe" Reactor_Deploy="0" />
     </VisualStudio>
   </ProjectExtensions>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -22,7 +22,7 @@
 // Filename:            LauncherWindow.xaml.cs
 // 
 // Created:             05.11.2015 (10:51)
-// Last Modified:       05.11.2015 (13:46)
+// Last Modified:       05.11.2015 (17:08)
 
 #endregion
 

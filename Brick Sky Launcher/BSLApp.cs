@@ -22,7 +22,7 @@
 // Filename:            BSLApp.cs
 // 
 // Created:             05.11.2015 (10:48)
-// Last Modified:       05.11.2015 (13:46)
+// Last Modified:       05.11.2015 (17:08)
 
 #endregion
 
@@ -30,6 +30,7 @@
 
 using System;
 using System.Windows;
+using BrickSkyLauncher.Modules;
 using BrickSkyLauncher.Windows;
 
 #endregion
@@ -48,7 +49,14 @@ namespace BrickSkyLauncher
         {
             var launcherWindow = new LauncherWindow();
             launcherWindow.Show();
+            ApplicationLogger.AddLogEntry(Logger.LogTypes.Debug, "BslApp",
+                "Application started. REMEMBER THIS IS AN ALPHA VERSION!");
         }
+
+        /// <summary>
+        ///     <see cref="Logger" /> for this application
+        /// </summary>
+        internal static Logger ApplicationLogger { get; set; }
 
         /// <summary>
         ///     This is the application entry point.
@@ -56,38 +64,18 @@ namespace BrickSkyLauncher
         [STAThread]
         public static void Main()
         {
-            var bslApp = new BslApp();
-
             try
             {
+                ApplicationLogger = new Logger();
+                var bslApp = new BslApp();
                 Current.Resources.MergedDictionaries.Add(
                     LoadComponent(new Uri("Brick Sky Launcher;component/Resources/Metro.xaml", UriKind.Relative)) as
                         ResourceDictionary);
-            }
-            catch (ArgumentNullException)
-            {
-                // TODO: Log
-            }
-            catch (ArgumentException)
-            {
-                // TODO: Log
-            }
-            catch (UriFormatException)
-            {
-                // TODO: Log
+                bslApp.Run();
             }
             catch (Exception)
             {
-                // TODO: Log
-            }
-
-            try
-            {
-                bslApp.Run();
-            }
-            catch (InvalidOperationException)
-            {
-                // TODO: Log
+                // TODO: Log exceptions
             }
         }
     }
