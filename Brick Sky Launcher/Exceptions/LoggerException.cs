@@ -21,8 +21,8 @@
 // Name of Project:     Brick Sky Launcher
 // Filename:            LoggerException.cs
 // 
-// Created:             05.11.2015 (15:50)
-// Last Modified:       05.11.2015 (17:08)
+// Created:             06.11.2015 (17:03)
+// Last Modified:       06.11.2015 (17:53)
 
 #endregion
 
@@ -33,7 +33,7 @@ using System.Runtime.Serialization;
 
 #endregion
 
-namespace BrickSkyLauncher.Modules
+namespace BrickSkyLauncher.Exceptions
 {
     /// <summary>
     ///     This <see cref="Exception" /> is thrown on logging errors.

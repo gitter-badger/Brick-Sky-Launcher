@@ -22,7 +22,7 @@
 // Filename:            Logger.cs
 // 
 // Created:             05.11.2015 (14:41)
-// Last Modified:       05.11.2015 (17:08)
+// Last Modified:       06.11.2015 (17:53)
 
 #endregion
 
@@ -32,6 +32,7 @@ using System;
 using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Linq;
+using BrickSkyLauncher.Exceptions;
 
 #endregion
 
@@ -44,7 +45,7 @@ namespace BrickSkyLauncher.Modules
     ///     with
     ///     <code>logger.AddLogEntry(logType, logTitle, logMessage)</code>.
     /// </summary>
-    internal class Logger
+    internal sealed class Logger
     {
         /// <summary>
         ///     Path to logfile (e.g. C:\Users\CurrentUser\AppData\Roaming\Brick
@@ -57,10 +58,10 @@ namespace BrickSkyLauncher.Modules
         /// <summary>
         ///     Starts the logger (see <see cref="InitLogger" />).
         /// </summary>
-        /// <exception cref="LoggerException">Logger was not able to start.</exception>
+        /// <exception cref="LoggerException">Logger was unable to start.</exception>
         [SuppressMessage("Microsoft.Globalization", "CA1305:SpecifyIFormatProvider",
             MessageId = "System.DateTime.ToString(System.String)")]
-        public Logger()
+        internal Logger()
         {
             try
             {
@@ -68,7 +69,7 @@ namespace BrickSkyLauncher.Modules
             }
             catch (Exception ex)
             {
-                throw new LoggerException("Logger was not able to start.", ex);
+                throw new LoggerException("Logger was unable to start", ex);
             }
         }
 
@@ -83,7 +84,7 @@ namespace BrickSkyLauncher.Modules
 
             if (string.IsNullOrEmpty(path))
             {
-                throw new LoggerException("Path to log is null or empty.");
+                throw new LoggerException("Path to log is null or empty");
             }
 
             Directory.CreateDirectory(path);
@@ -96,19 +97,7 @@ namespace BrickSkyLauncher.Modules
                 }
             }
 
-            using (var w = File.AppendText(_pathToLogfile))
-            {
-                w.WriteLine("=====================================================================================");
-                w.WriteLine("=                                                                                   =");
-                w.WriteLine("=                                                                                   =");
-                w.WriteLine("=                       LOGFILE CREATED BY BRICK SKY LAUNCHER                       =");
-                w.WriteLine("=                                                                                   =");
-                w.WriteLine("=                                                                                   =");
-                w.WriteLine("=====================================================================================");
-                w.WriteLine("   ~~~ Date of creation:      " + DateTime.Now.ToLongDateString());
-                w.WriteLine("   ~~~ Time of creation:      " + DateTime.Now.ToLongTimeString());
-                w.WriteLine("=====================================================================================");
-            }
+            AddLogEntry(LogTypes.Information, "Logger", "Initialization of Logger finished");
         }
 
         /// <summary>
@@ -122,14 +111,16 @@ namespace BrickSkyLauncher.Modules
         /// <param name="logTitle">The title of the message to log</param>
         /// <param name="logMessage">The message to log</param>
         /// <exception cref="LoggerException">Logger was not able to log an entry.</exception>
+        [SuppressMessage("Microsoft.Globalization", "CA1305:SpecifyIFormatProvider",
+            MessageId = "System.DateTime.ToString(System.String)")]
         internal void AddLogEntry(string logType, string logTitle, string logMessage)
         {
             try
             {
                 using (var w = File.AppendText(_pathToLogfile))
                 {
-                    w.WriteLine("{0} - {1, -10} in {2, -20} : {3}", DateTime.Now.ToLongTimeString(), logType, logTitle,
-                        logMessage);
+                    w.WriteLine("{0} | {1} | {2, -10} | {3, -20} | {4}", DateTime.Now.ToString("yyyy-MM-dd"),
+                        DateTime.Now.ToLongTimeString(), logType, logTitle, logMessage);
                 }
             }
             catch (Exception ex)
@@ -141,7 +132,7 @@ namespace BrickSkyLauncher.Modules
         /// <summary>
         ///     Available types of log messages
         /// </summary>
-        public static class LogTypes
+        internal static class LogTypes
         {
             /// <summary>
             ///     Used to log debug information

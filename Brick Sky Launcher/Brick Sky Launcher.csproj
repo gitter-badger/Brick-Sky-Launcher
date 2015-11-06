@@ -42,6 +42,7 @@
     <WarningLevel>4</WarningLevel>
     <RunCodeAnalysis>true</RunCodeAnalysis>
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <DocumentationFile>bin\Debug\Brick Sky Launcher.xml</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -78,8 +79,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BSLApp.cs" />
+    <Compile Include="Exceptions\ConfigurationManagerException.cs" />
+    <Compile Include="Modules\ConfigurationManager.cs" />
     <Compile Include="Modules\Logger.cs" />
-    <Compile Include="Modules\LoggerException.cs" />
+    <Compile Include="Exceptions\LoggerException.cs" />
     <Compile Include="Windows\LauncherWindow.xaml.cs">
       <DependentUpon>LauncherWindow.xaml</DependentUpon>
     </Compile>
@@ -112,7 +115,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="BickSkyLauncherKey.snk" />
+    <EmbeddedResource Include="Resources\Launcher.brickskycfg" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>
     <VisualStudio>

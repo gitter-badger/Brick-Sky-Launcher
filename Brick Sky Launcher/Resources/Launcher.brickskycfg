@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<BrickSkyLauncherConfiguration>
+  <LauncherSettings>
+    <FirstStart>true</FirstStart>
+  </LauncherSettings>
+  <GameSettings>
+    <PathToMinecraft></PathToMinecraft>
+  </GameSettings>
+</BrickSkyLauncherConfiguration>
