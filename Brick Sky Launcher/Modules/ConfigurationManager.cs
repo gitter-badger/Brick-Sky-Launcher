@@ -22,7 +22,7 @@
 // Filename:            ConfigurationManager.cs
 // 
 // Created:             06.11.2015 (16:46)
-// Last Modified:       06.11.2015 (17:53)
+// Last Modified:       06.11.2015 (18:33)
 
 #endregion
 

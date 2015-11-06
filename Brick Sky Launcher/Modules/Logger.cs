@@ -22,7 +22,7 @@
 // Filename:            Logger.cs
 // 
 // Created:             05.11.2015 (14:41)
-// Last Modified:       06.11.2015 (17:53)
+// Last Modified:       06.11.2015 (18:33)
 
 #endregion
 
@@ -115,6 +115,11 @@ namespace BrickSkyLauncher.Modules
             MessageId = "System.DateTime.ToString(System.String)")]
         internal void AddLogEntry(string logType, string logTitle, string logMessage)
         {
+            if ((logType == LogTypes.Debug) && !BslApp.StartArguments.Contains("-debug"))
+            {
+                return;
+            }
+
             try
             {
                 using (var w = File.AppendText(_pathToLogfile))

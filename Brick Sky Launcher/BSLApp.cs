@@ -22,14 +22,13 @@
 // Filename:            BSLApp.cs
 // 
 // Created:             05.11.2015 (10:48)
-// Last Modified:       06.11.2015 (17:53)
+// Last Modified:       06.11.2015 (18:33)
 
 #endregion
 
 #region Imports
 
 using System;
-using System.Diagnostics;
 using System.Windows;
 using BrickSkyLauncher.Exceptions;
 using BrickSkyLauncher.Modules;
@@ -44,6 +43,11 @@ namespace BrickSkyLauncher
     /// </summary>
     internal sealed class BslApp : Application
     {
+        /// <summary>
+        ///     Start arguments of the application
+        /// </summary>
+        internal static readonly string[] StartArguments = Environment.GetCommandLineArgs();
+
         /// <summary>
         ///     Constructor of application. Used to initialize global fields.
         /// </summary>
