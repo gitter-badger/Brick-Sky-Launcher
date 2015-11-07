@@ -22,7 +22,7 @@
 // Filename:            Logger.cs
 // 
 // Created:             05.11.2015 (14:41)
-// Last Modified:       06.11.2015 (18:33)
+// Last Modified:       07.11.2015 (13:30)
 
 #endregion
 
@@ -40,47 +40,30 @@ namespace BrickSkyLauncher.Modules
 {
     /// <summary>
     ///     Logs messages to logfiles at a specific path (see
-    ///     <see cref="_pathToLogfile" />). Start a new logger instance with
+    ///     <see cref="PathToLogfile" />). Start a new logger instance with
     ///     <code>var logger = new Logger()</code>. You can add a new log entry
     ///     with
     ///     <code>logger.AddLogEntry(logType, logTitle, logMessage)</code>.
     /// </summary>
-    internal sealed class Logger
+    internal static class Logger
     {
         /// <summary>
         ///     Path to logfile (e.g. C:\Users\CurrentUser\AppData\Roaming\Brick
         ///     Sky\Launcher\Logs\201501011200.brickskylog)
         /// </summary>
-        private readonly string _pathToLogfile = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) +
-                                                 "\\Brick Sky\\Launcher\\Logs\\" +
-                                                 DateTime.Now.ToString("yyyyMMddHHmmss") + ".brickskylog";
-
-        /// <summary>
-        ///     Starts the logger (see <see cref="InitLogger" />).
-        /// </summary>
-        /// <exception cref="LoggerException">Logger was unable to start.</exception>
-        [SuppressMessage("Microsoft.Globalization", "CA1305:SpecifyIFormatProvider",
-            MessageId = "System.DateTime.ToString(System.String)")]
-        internal Logger()
-        {
-            try
-            {
-                InitLogger();
-            }
-            catch (Exception ex)
-            {
-                throw new LoggerException("Logger was unable to start", ex);
-            }
-        }
+        private static readonly string PathToLogfile =
+            Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) +
+            "\\Brick Sky\\Launcher\\Logs\\" +
+            DateTime.Now.ToString("yyyyMMddHHmmss") + ".brickskylog";
 
         /// <summary>
         ///     Starts the logger and creates a new logfile. If there are more than ten logfiles in the log-folder, all will be
         ///     deleted.
         /// </summary>
         /// <exception cref="LoggerException">Path to log is null or empty.</exception>
-        private void InitLogger()
+        internal static void Init()
         {
-            var path = Path.GetDirectoryName(_pathToLogfile);
+            var path = Path.GetDirectoryName(PathToLogfile);
 
             if (string.IsNullOrEmpty(path))
             {
@@ -113,7 +96,7 @@ namespace BrickSkyLauncher.Modules
         /// <exception cref="LoggerException">Logger was not able to log an entry.</exception>
         [SuppressMessage("Microsoft.Globalization", "CA1305:SpecifyIFormatProvider",
             MessageId = "System.DateTime.ToString(System.String)")]
-        internal void AddLogEntry(string logType, string logTitle, string logMessage)
+        internal static void AddLogEntry(string logType, string logTitle, string logMessage)
         {
             if ((logType == LogTypes.Debug) && !BslApp.StartArguments.Contains("-debug"))
             {
@@ -122,7 +105,7 @@ namespace BrickSkyLauncher.Modules
 
             try
             {
-                using (var w = File.AppendText(_pathToLogfile))
+                using (var w = File.AppendText(PathToLogfile))
                 {
                     w.WriteLine("{0} | {1} | {2, -10} | {3, -20} | {4}", DateTime.Now.ToString("yyyy-MM-dd"),
                         DateTime.Now.ToLongTimeString(), logType, logTitle, logMessage);

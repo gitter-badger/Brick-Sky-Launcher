@@ -22,7 +22,7 @@
 // Filename:            ConfigurationManager.cs
 // 
 // Created:             06.11.2015 (16:46)
-// Last Modified:       06.11.2015 (18:33)
+// Last Modified:       07.11.2015 (13:30)
 
 #endregion
 
@@ -42,45 +42,30 @@ namespace BrickSkyLauncher.Modules
     /// <summary>
     ///     Saves settings in a configuration file to use them later
     /// </summary>
-    internal sealed class ConfigurationManager
+    internal static class ConfigurationManager
     {
         /// <summary>
         ///     Loaded configuration file
         /// </summary>
-        private readonly XmlDocument _configFile = new XmlDocument();
+        private static readonly XmlDocument ConfigFile = new XmlDocument();
 
         /// <summary>
-        ///     Path to the configuration file (e.g. C:\Users\CurrentUser\AppData\Roaming\Brick
+        ///     <see cref="Path" /> to the configuration file (e.g.
+        ///     C:\Users\CurrentUser\AppData\Roaming\Brick
         ///     Sky\Launcher\Config\Launcher.brickskycfg)
         /// </summary>
-        private readonly string _pathToConfigFile =
+        private static readonly string PathToConfigFile =
             Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) +
             "\\Brick Sky\\Launcher\\Config\\Launcher.brickskycfg";
 
         /// <summary>
-        ///     Starts the configuration manager (see <see cref="InitConfigurationManager" />)
+        ///     Starts the configuration manager and creates the config file if it
+        ///     is missing
         /// </summary>
-        /// <exception cref="LoggerException">Logger was not able to log a configuration exception.</exception>
-        internal ConfigurationManager()
+        /// <exception cref="ConfigurationManagerException" />
+        internal static void Init()
         {
-            try
-            {
-                InitConfigurationManager();
-            }
-            catch (ConfigurationManagerException configurationManagerException)
-            {
-                BslApp.ApplicationLogger.AddLogEntry(Logger.LogTypes.Fatal, "ConfigurationManager",
-                    configurationManagerException.Message);
-            }
-        }
-
-        /// <summary>
-        ///     Starts the configuration manager and creates the config file if it is missing
-        /// </summary>
-        /// <exception cref="ConfigurationManagerException"></exception>
-        private void InitConfigurationManager()
-        {
-            var path = Path.GetDirectoryName(_pathToConfigFile);
+            var path = Path.GetDirectoryName(PathToConfigFile);
 
             if (string.IsNullOrEmpty(path))
             {
@@ -89,21 +74,21 @@ namespace BrickSkyLauncher.Modules
 
             Directory.CreateDirectory(path);
 
-            if (!File.Exists(_pathToConfigFile))
+            if (!File.Exists(PathToConfigFile))
             {
                 using (
                     var stream =
                         Assembly.GetExecutingAssembly()
                             .GetManifestResourceStream("BrickSkyLauncher.Resources.Launcher.brickskycfg"))
                 {
-                    using (var file = new FileStream(_pathToConfigFile, FileMode.Create, FileAccess.Write))
+                    using (var file = new FileStream(PathToConfigFile, FileMode.Create, FileAccess.Write))
                     {
                         stream?.CopyTo(file);
                     }
                 }
             }
 
-            _configFile.Load(_pathToConfigFile);
+            ConfigFile.Load(PathToConfigFile);
         }
 
         /// <summary>
@@ -112,10 +97,12 @@ namespace BrickSkyLauncher.Modules
         /// <param name="category">The category of the setting</param>
         /// <param name="key">The key of the setting</param>
         /// <param name="value">The value of the setting</param>
-        /// <exception cref="ConfigurationManagerException">Configuration file is corrupt</exception>
-        internal void Set(string category, string key, string value)
+        /// <exception cref="ConfigurationManagerException">
+        ///     Configuration file is corrupt
+        /// </exception>
+        internal static void Set(string category, string key, string value)
         {
-            if (_configFile.DocumentElement == null)
+            if (ConfigFile.DocumentElement == null)
             {
                 throw new ConfigurationManagerException("Configuration file is corrupt");
             }
@@ -125,8 +112,8 @@ namespace BrickSkyLauncher.Modules
             try
             {
                 configKey =
-                    _configFile.DocumentElement.SelectSingleNode("/BrickSkyLauncherConfiguration/" + category + "/" +
-                                                                 key);
+                    ConfigFile.DocumentElement.SelectSingleNode("/BrickSkyLauncherConfiguration/" + category + "/" +
+                                                                key);
             }
             catch (XPathException xPathException)
             {
@@ -152,9 +139,9 @@ namespace BrickSkyLauncher.Modules
         /// <returns>
         ///     Value of the setting
         /// </returns>
-        internal string Get(string category, string key)
+        internal static string Get(string category, string key)
         {
-            if (_configFile.DocumentElement == null)
+            if (ConfigFile.DocumentElement == null)
             {
                 throw new ConfigurationManagerException("Configuration file is corrupt");
             }
@@ -164,8 +151,8 @@ namespace BrickSkyLauncher.Modules
             try
             {
                 configKey =
-                    _configFile.DocumentElement.SelectSingleNode("/BrickSkyLauncherConfiguration/" + category + "/" +
-                                                                 key);
+                    ConfigFile.DocumentElement.SelectSingleNode("/BrickSkyLauncherConfiguration/" + category + "/" +
+                                                                key);
             }
             catch (XPathException xPathException)
             {

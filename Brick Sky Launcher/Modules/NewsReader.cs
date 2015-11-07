@@ -19,51 +19,47 @@
 // 
 // Part of Solution:    Brick Sky Launcher
 // Name of Project:     Brick Sky Launcher
-// Filename:            LauncherWindow.xaml.cs
+// Filename:            NewsReader.cs
 // 
-// Created:             05.11.2015 (10:51)
+// Created:             06.11.2015 (22:43)
 // Last Modified:       07.11.2015 (13:30)
 
 #endregion
 
 #region Imports
 
-using System.Diagnostics;
-using System.Windows;
+using System.ServiceModel.Syndication;
+using System.Xml;
 
 #endregion
 
-namespace BrickSkyLauncher.Windows
+namespace BrickSkyLauncher.Modules
 {
     /// <summary>
-    ///     This is the main window of the application.
+    ///     Gets the news from the website and displays them in the launcher
     /// </summary>
-    internal sealed partial class LauncherWindow
+    internal sealed class NewsReader
     {
         /// <summary>
-        ///     This is the constructor of the main window.
+        ///     Location of RSS-Feed
         /// </summary>
-        public LauncherWindow()
-        {
-            InitializeComponent();
+        private const string NewsUrl = "http://www.bricksky.de/forum/cms/index.php?news-feed/";
 
-            // ShowNews();
-        }
-
-        //private void ShowNews()
-        //{
-        //    var newsReader = new NewsReader();
-        //    LstFeedItems.ItemsSource = newsReader.Feed.Items;
-        //}
+        internal SyndicationFeed Feed;
 
         /// <summary>
-        ///     Opens a new Internet window and navigates to Github Issues.
+        ///     Gets the news from the website
         /// </summary>
-        /// <param name="sender">The source of the routed event.</param>
-        /// <param name="e">
-        ///     State information and event data associated with the routed event.
-        /// </param>
-        private void ReportBug(object sender, RoutedEventArgs e)
-            => Process.Start("https://github.com/SirRammspopo/Brick-Sky-Launcher/issues/new");
+        internal NewsReader()
+        {
+            using (var reader = XmlReader.Create(NewsUrl))
+            {
+                Feed = SyndicationFeed.Load(reader);
+                foreach (var item in Feed.Items)
+                {
+                    Logger.AddLogEntry(Logger.LogTypes.Debug, "NewsReader", item.Title.Text);
+                }
+            }
+        }
     }
 }

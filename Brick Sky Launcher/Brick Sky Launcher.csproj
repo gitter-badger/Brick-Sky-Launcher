@@ -68,6 +68,7 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ServiceModel" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xaml">
@@ -83,6 +84,7 @@
     <Compile Include="Modules\ConfigurationManager.cs" />
     <Compile Include="Modules\Logger.cs" />
     <Compile Include="Exceptions\LoggerException.cs" />
+    <Compile Include="Modules\NewsReader.cs" />
     <Compile Include="Windows\LauncherWindow.xaml.cs">
       <DependentUpon>LauncherWindow.xaml</DependentUpon>
     </Compile>
@@ -121,7 +123,7 @@
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>
     <VisualStudio>
-      <UserProperties Reactor_Enabled="0" Reactor_Commands="" Reactor_Project="X:\Brick Sky\Brick Sky Launcher\Protected\BrickSkyLauncherAlpha.nrproj" Reactor_Configuration="ALL" Reactor_Output="X:\Brick Sky\Brick Sky Launcher\Protected\Output\Brick Sky Launcher.exe" Reactor_Deploy="0" />
+      <UserProperties Reactor_Deploy="0" Reactor_Output="X:\Brick Sky\Brick Sky Launcher\Protected\Output\Brick Sky Launcher.exe" Reactor_Configuration="ALL" Reactor_Project="X:\Brick Sky\Brick Sky Launcher\Protected\BrickSkyLauncherAlpha.nrproj" Reactor_Commands="" Reactor_Enabled="0" />
     </VisualStudio>
   </ProjectExtensions>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

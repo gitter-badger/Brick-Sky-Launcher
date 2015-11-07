@@ -5,13 +5,13 @@
     xmlns:system="clr-namespace:System;assembly=mscorlib"
     x:Class="BrickSkyLauncher.Windows.LauncherWindow"
     Title="{DynamicResource WindowTitle}"
-    Height="350"
-    Width="525"
+    Height="500"
+    Width="750"
 
     BorderThickness="0"
     GlowBrush="Black"
 
-    WindowStartupLocation="CenterScreen" x:ClassModifier="internal">
+    WindowStartupLocation="CenterScreen" x:ClassModifier="internal" MinWidth="750" MinHeight="500">
 
     <controls:MetroWindow.Resources>
         <system:String x:Key="WindowTitle">Block Sky Launcher</system:String>
@@ -24,5 +24,26 @@
         </controls:WindowCommands>
     </controls:MetroWindow.RightWindowCommands>
 
-    <Grid />
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="545*" />
+            <ColumnDefinition Width="200*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="55*" />
+            <RowDefinition Height="10*" />
+        </Grid.RowDefinitions>
+        <Label x:Name="PlaceholderNews" Content="&lt; NEWS &gt;" Margin="10" Background="#FFB0B0B0" Foreground="White"
+               FontFamily="Arial" FontSize="24" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" />
+        <Label x:Name="PlaceholderSocialMedia" Content="&lt; SOCIAL MEDIA &gt;" Margin="10" Background="#FFB0B0B0"
+               Foreground="White" FontFamily="Arial" FontSize="24" VerticalContentAlignment="Center"
+               HorizontalContentAlignment="Center" Grid.Row="1"
+               Grid.Column="0" />
+        <Label x:Name="PlaceholderInfo" Content="&lt; INFO? &gt;" Margin="10" Background="#FFB0B0B0" Foreground="White"
+               FontFamily="Arial" FontSize="24" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"
+               Grid.Row="0" Grid.Column="1" />
+        <Label x:Name="PlaceholderPlay" Content="&lt; PLAY &gt;" Margin="10" Background="#FFB0B0B0" Foreground="White"
+               FontFamily="Arial" FontSize="24" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"
+               Grid.Column="1" Grid.Row="1" />
+    </Grid>
 </controls:MetroWindow>

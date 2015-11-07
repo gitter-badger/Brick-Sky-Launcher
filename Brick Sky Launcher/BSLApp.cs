@@ -22,7 +22,7 @@
 // Filename:            BSLApp.cs
 // 
 // Created:             05.11.2015 (10:48)
-// Last Modified:       06.11.2015 (18:33)
+// Last Modified:       07.11.2015 (13:30)
 
 #endregion
 
@@ -49,7 +49,7 @@ namespace BrickSkyLauncher
         internal static readonly string[] StartArguments = Environment.GetCommandLineArgs();
 
         /// <summary>
-        ///     Constructor of application. Used to initialize global fields.
+        ///     Constructor of application. Used to start windows.
         /// </summary>
         private BslApp()
         {
@@ -57,19 +57,9 @@ namespace BrickSkyLauncher
 
             launcherWindow.Show();
 
-            ApplicationLogger.AddLogEntry(Logger.LogTypes.Debug, "BslApp",
+            Logger.AddLogEntry(Logger.LogTypes.Debug, "BslApp",
                 "Application started. REMEMBER THIS IS AN ALPHA VERSION!");
         }
-
-        /// <summary>
-        ///     <see cref="Logger" /> for this application
-        /// </summary>
-        internal static Logger ApplicationLogger { get; private set; }
-
-        /// <summary>
-        ///     <see cref="ConfigurationManager" /> for this application
-        /// </summary>
-        internal static ConfigurationManager ApplicationConfigurationManager { get; private set; }
 
         /// <summary>
         ///     This is the application entry point.
@@ -79,13 +69,13 @@ namespace BrickSkyLauncher
         {
             try
             {
-                ApplicationLogger = new Logger();
+                Logger.Init();
 
-                ApplicationConfigurationManager = new ConfigurationManager();
+                ConfigurationManager.Init();
 
                 var bslApp = new BslApp();
 
-                Current.Resources.MergedDictionaries.Add(
+                bslApp.Resources.MergedDictionaries.Add(
                     LoadComponent(new Uri("Brick Sky Launcher;component/Resources/Metro.xaml", UriKind.Relative)) as
                         ResourceDictionary);
 
