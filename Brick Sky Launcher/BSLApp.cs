@@ -29,6 +29,7 @@
 #region Imports
 
 using System;
+using System.Reflection;
 using System.Windows;
 using BrickSkyLauncher.Exceptions;
 using BrickSkyLauncher.Modules;
@@ -59,13 +60,16 @@ namespace BrickSkyLauncher
 
             Logger.AddLogEntry(Logger.LogTypes.Debug, "BslApp",
                 "Application started. REMEMBER THIS IS AN ALPHA VERSION!");
+
+            Logger.AddLogEntry(Logger.LogTypes.Information, "BslApp",
+                "Brick Sky Launcher Version " + Assembly.GetExecutingAssembly().GetName().Version);
         }
 
         /// <summary>
         ///     This is the application entry point.
         /// </summary>
         [STAThread]
-        public static void Main()
+        internal static void Main()
         {
             try
             {

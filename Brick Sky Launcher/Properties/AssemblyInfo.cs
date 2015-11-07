@@ -1,4 +1,5 @@
-﻿#region Information and License
+﻿using System.Runtime.CompilerServices;
+#region Information and License
 
 // This file is part of Brick Sky Launcher.
 // 
@@ -46,7 +47,7 @@ using System.Windows;
 [assembly: AssemblyCulture("")]
 [assembly: ComVisible(false)]
 [assembly: ThemeInfo(ResourceDictionaryLocation.None, ResourceDictionaryLocation.SourceAssembly)]
-[assembly: AssemblyVersion("0.1.30")]
-[assembly: AssemblyFileVersion("0.1.30")]
+[assembly: AssemblyVersion("0.1.44")]
+[assembly: AssemblyFileVersion("0.1.44")]
 [assembly: NeutralResourcesLanguage("de-DE")]
 [assembly: CLSCompliant(false)]

@@ -94,8 +94,6 @@ namespace BrickSkyLauncher.Modules
         /// <param name="logTitle">The title of the message to log</param>
         /// <param name="logMessage">The message to log</param>
         /// <exception cref="LoggerException">Logger was not able to log an entry.</exception>
-        [SuppressMessage("Microsoft.Globalization", "CA1305:SpecifyIFormatProvider",
-            MessageId = "System.DateTime.ToString(System.String)")]
         internal static void AddLogEntry(string logType, string logTitle, string logMessage)
         {
             if ((logType == LogTypes.Debug) && !BslApp.StartArguments.Contains("-debug"))
