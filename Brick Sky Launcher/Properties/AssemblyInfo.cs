@@ -1,5 +1,4 @@
-﻿using System.Runtime.CompilerServices;
-#region Information and License
+﻿#region Information and License
 
 // This file is part of Brick Sky Launcher.
 // 
@@ -23,7 +22,7 @@
 // Filename:            AssemblyInfo.cs
 // 
 // Created:             05.11.2015 (09:47)
-// Last Modified:       07.11.2015 (13:30)
+// Last Modified:       07.11.2015 (18:51)
 
 #endregion
 

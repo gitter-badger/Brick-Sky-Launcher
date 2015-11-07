@@ -22,7 +22,7 @@
 // Filename:            NewsReader.cs
 // 
 // Created:             06.11.2015 (22:43)
-// Last Modified:       07.11.2015 (13:30)
+// Last Modified:       07.11.2015 (18:48)
 
 #endregion
 

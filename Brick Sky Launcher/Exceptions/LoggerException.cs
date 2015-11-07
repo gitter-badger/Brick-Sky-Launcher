@@ -22,7 +22,7 @@
 // Filename:            LoggerException.cs
 // 
 // Created:             06.11.2015 (17:03)
-// Last Modified:       07.11.2015 (13:30)
+// Last Modified:       07.11.2015 (18:48)
 
 #endregion
 

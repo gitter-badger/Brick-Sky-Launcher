@@ -22,14 +22,13 @@
 // Filename:            Logger.cs
 // 
 // Created:             05.11.2015 (14:41)
-// Last Modified:       07.11.2015 (13:30)
+// Last Modified:       07.11.2015 (18:48)
 
 #endregion
 
 #region Imports
 
 using System;
-using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Linq;
 using BrickSkyLauncher.Exceptions;
